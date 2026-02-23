@@ -64,7 +64,12 @@ app.delete("/todos/:id", (req: Request<{ id: string }>, res: Response) => {
 });
 
 const PORT = 4000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
 
+// Só inicia o servidor se não estiver em ambiente de teste
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+  });
+}
+
+export default app;
